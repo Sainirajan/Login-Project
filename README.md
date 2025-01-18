@@ -49,15 +49,7 @@ git clone https://github.com/Sainirajan/Login-Project.git
 cd Login-Project
 ```
 
-### 2. Create a Virtual Environment and Install Dependencies
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r app/requirements.txt
-```
-
-### 3. Configure Environment Variables
+### 2. Configure Environment Variables
 
 Copy the `.env.example` file to `.env` and update the values as required:
 
@@ -65,7 +57,7 @@ Copy the `.env.example` file to `.env` and update the values as required:
 cp .env.example .env
 ```
 
-### 4. Build and Run the Docker Container
+### 3. Build and Run the Docker Container
 
 Build the Docker image:
 
@@ -81,7 +73,7 @@ docker run -p 5000:5000 --env-file .env login-project
 
 Access the application at `http://localhost:5000`.
 
-### 5. Deploy on AWS EC2 Using Terraform
+### 4. Deploy on AWS EC2 Using Terraform
 
 1. Navigate to the `terraform` directory:
 
@@ -128,14 +120,3 @@ Contributions are welcome! Please follow these steps:
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Contact
-
-For questions or support, feel free to reach out:
-
-- **Author:** Sai Niranjan
-- **GitHub:** [Sainirajan](https://github.com/Sainirajan)
-- **Email:** sainiranjan@example.com
-
----
-
-Let me know if you'd like any adjustments or additional sections added!
