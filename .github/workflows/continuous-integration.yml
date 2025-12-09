@@ -19,9 +19,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build Docker image from subfolder
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/login-project:latest .
+          docker build \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/login-project:latest \
+            ./Flask-Web-App-Tutorial
 
       - name: Push Docker image
         run: |
