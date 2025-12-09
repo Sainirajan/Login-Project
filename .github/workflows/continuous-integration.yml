@@ -28,3 +28,9 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/login-project:latest
+
+      - name: Trigger Webhook on EC2 for Deployment
+        run: |
+          curl -X POST ${{ secrets.WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{"redeploy": "true"}'
