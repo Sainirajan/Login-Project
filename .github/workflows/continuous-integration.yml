@@ -3,7 +3,7 @@ name: CI - Build and Push Docker Image
 on:
   push:
     branches:
-      - main   # only push images when main is updated
+      - main
 
 jobs:
   build-and-push:
@@ -19,20 +19,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build Docker image from subfolder
+      - name: Build Docker image from subfolder with both tags
         run: |
           docker build \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/login-project:v${{ github.run_number }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/login-project:latest \
             ./Flask-Web-App-Tutorial
 
-      - name: Push Docker image
+      - name: Push Docker images
         run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/login-project:v${{ github.run_number }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/login-project:latest
 
       - name: Trigger Webhook on EC2 for Deployment
         run: |
-          curl -X POST ${{ secrets.WEBHOOK_URL }} \
+          curl -X POST "${{ secrets.WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
-            -d '{"redeploy": "true"}'
-
-            
+            -d "{\"tag\": \"v${{ github.run_number }}\"}"
